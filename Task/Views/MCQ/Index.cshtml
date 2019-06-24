@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "MCQ";
+}
+
+<h2>Multiple Choice</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MCQ</title>
+</head>
+<body>
+    @using (Html.BeginForm("Post", "MCQ", FormMethod.Post))
+    {
+        <br />
+        <br />
+        @Html.Label("Questionlabel", "Write your Question here", new { @class = "Lablels" });
+        @Html.TextArea("QuestionBody", "", new { @class = "form-control QuestionBody" })
+        @Html.Label("AnswerLabel", "Add your Answers here", new { @class = "Lablels" });
+        <div id="TextBoxContainer">
+            <!--Textboxes will be added here -->
+        </div>
+        <br />
+        <input id="btnAdd" type="button" value="Add" onclick="AddTextBox()" />
+        <br />
+        <input id="btnsubmit" class="btn" type="submit" name="submitbutton" value="Save" />
+        <input id="btnsubmitpreview" class="btn" type="submit" name="submitbutton" value="Preview" />
+    }
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="~/js/JavaScript.js"></script>
+    <script type="text/javascript">
+        //set value if data exist this in preview and return from preview
+            $(function () {
+                var values = eval('@Html.Raw(ViewBag.Values)');
+                var questionbody = '@Html.Raw(ViewBag.questionbody)';
+                var correctanswer = '@Html.Raw(ViewBag.correctanswer)';
+                if (values != null) {
+                    $("#TextBoxContainer").html("");
+                    $(values).each(function () {
+                        $("#TextBoxContainer").append(GetDynamicTextBox(this));
+                    });
+                    if ($("#TextBoxContainer > div").length > 2)
+                        $(".removebutton").show();
+                    else
+                        $(".removebutton").hide();
+                }
+                if (questionbody != "")
+                    $('input[name=QuestionBody]').val(questionbody);
+                if (correctanswer != "") {
+                    $('input[name=CorrectAnswer]').val([`${correctanswer}`]);
+                    $(`input[name=CorrectAnswer][value=${correctanswer}]`).next().next().val(1);
+                }
+            });
+    </script>
+</body>
+</html>

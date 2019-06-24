@@ -1,0 +1,33 @@
+﻿body {
+}
+.QuestionBody{
+
+    width:60%;
+    height:100px;
+    margin-left:20%;
+    margin-top:20px;
+    
+}
+
+.answers{
+    margin-left:25%;
+    margin-top:2%;
+}
+
+.answerelement{
+    margin-left:3%;
+}
+
+#btnAdd{
+    margin-left: 70%;
+    margin-top: 2%;
+}
+
+#btnsubmit{
+    margin-left:50%;
+}
+
+.btn {
+    margin-top: 5%;
+    margin-left: 2%;
+}
